@@ -54,11 +54,12 @@ public class MainActivityFragment extends Fragment {
         mRecyclerNotifier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "RecyclerNotify clicked!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), "RecyclerNotifier clicked!", Toast.LENGTH_SHORT).show();
             }
         });
+
         mRecyclerNotifier.setText("New stories");
-        RecyclerNotifyAttacher.attach(mRecyclerNotifier, mRecyclerView);
+        RecyclerNotifierAttacher.attach(mRecyclerNotifier, mRecyclerView);
         mRecyclerView.addOnScrollListener(mRecyclerNotifier.getOnScrollListener());
         return view;
     }

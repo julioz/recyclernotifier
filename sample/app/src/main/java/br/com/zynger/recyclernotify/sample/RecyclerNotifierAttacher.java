@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.RelativeLayout;
 
-public class RecyclerNotifyAttacher {
+public class RecyclerNotifierAttacher {
 
     public static final int ANCHOR_TOP = 0;
     public static final int ANCHOR_BOTTOM = ANCHOR_TOP + 1;
