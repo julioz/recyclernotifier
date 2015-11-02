@@ -7,8 +7,7 @@
         android:layout_width="18dp"
         android:layout_height="18dp"
         android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-        android:src="@mipmap/ic_launcher"/>
+        android:scaleType="fitCenter"/>
 
     <TextView
         android:id="@+id/rn_text"

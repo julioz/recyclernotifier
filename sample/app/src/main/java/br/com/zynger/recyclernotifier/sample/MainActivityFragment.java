@@ -13,6 +13,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.zynger.recyclernotifier.RecyclerNotifier;
+import br.com.zynger.recyclernotifier.RecyclerNotifierAttacher;
+
 public class MainActivityFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
@@ -40,6 +43,7 @@ public class MainActivityFragment extends Fragment {
         });
 
         mRecyclerNotifier.setText("New stories");
+        mRecyclerNotifier.setImageResource(R.mipmap.ic_launcher);
         mRecyclerView.addOnScrollListener(mRecyclerNotifier.getOnScrollListener());
         RecyclerNotifierAttacher.attach(mRecyclerNotifier, mRecyclerView);
         return view;

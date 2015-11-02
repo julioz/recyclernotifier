@@ -1,4 +1,4 @@
-package br.com.zynger.recyclernotifier.sample;
+package br.com.zynger.recyclernotifier;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
