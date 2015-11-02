@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,8 @@ public class RecyclerNotify extends LinearLayout {
     private final Animation mShrinkAnimation;
     private final Animation mGrowAnimation;
     private boolean isAnimating = false;
+
+    private RecyclerView.OnScrollListener mOnScrollListener;
 
     private ImageView mIconImageView;
     private TextView mTitleTextView;
@@ -77,6 +80,33 @@ public class RecyclerNotify extends LinearLayout {
 
             }
         });
+
+        mOnScrollListener = new RecyclerView.OnScrollListener() {
+            private static final int SCROLL_THRESHOLD = 20;
+            private int mTotalScrollAmount = 0;
+            private boolean isVisible = true;
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                if (mTotalScrollAmount > SCROLL_THRESHOLD && isVisible) {
+                    hide();
+                    isVisible = false;
+                    mTotalScrollAmount = 0;
+                } else if (mTotalScrollAmount < -SCROLL_THRESHOLD && !isVisible) {
+                    show();
+                    isVisible = true;
+                    mTotalScrollAmount = 0;
+                }
+
+                boolean scrollingDown = dy > 0;
+                boolean scrollingUp = !scrollingDown;
+                if ((isVisible && scrollingDown) || (!isVisible && scrollingUp)) {
+                    mTotalScrollAmount += dy;
+                }
+            }
+        };
     }
 
     public void setImageResource(@DrawableRes int resId) {
@@ -120,5 +150,9 @@ public class RecyclerNotify extends LinearLayout {
         }
 
         startAnimation(mGrowAnimation);
+    }
+
+    public RecyclerView.OnScrollListener getOnScrollListener() {
+        return mOnScrollListener;
     }
 }

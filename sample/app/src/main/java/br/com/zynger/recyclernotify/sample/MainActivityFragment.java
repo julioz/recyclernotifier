@@ -59,6 +59,7 @@ public class MainActivityFragment extends Fragment {
         });
         mRecyclerNotify.setText("Novas histórias");
         RecyclerNotifyAttacher.attach(mRecyclerNotify, mRecyclerView);
+        mRecyclerView.addOnScrollListener(mRecyclerNotify.getOnScrollListener());
         return view;
     }
 
