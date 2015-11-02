@@ -16,6 +16,7 @@ import java.util.List;
 public class MainActivityFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
+    private RecyclerNotify mRecyclerNotify;
 
     public MainActivityFragment() {
     }
@@ -24,6 +25,20 @@ public class MainActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
+
+        view.findViewById(R.id.btn_hide).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mRecyclerNotify.hide();
+            }
+        });
+
+        view.findViewById(R.id.btn_show).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mRecyclerNotify.show();
+            }
+        });
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -35,15 +50,15 @@ public class MainActivityFragment extends Fragment {
         SampleAdapter adapter = new SampleAdapter(items);
         mRecyclerView.setAdapter(adapter);
 
-        RecyclerNotify recyclerNotify = new RecyclerNotify(getContext());
-        recyclerNotify.setOnClickListener(new View.OnClickListener() {
+        mRecyclerNotify = new RecyclerNotify(getContext());
+        mRecyclerNotify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), "RecyclerNotify clicked!", Toast.LENGTH_SHORT).show();
             }
         });
-        recyclerNotify.setText("Novas histórias");
-        RecyclerNotifyAttacher.attach(recyclerNotify, mRecyclerView);
+        mRecyclerNotify.setText("Novas histórias");
+        RecyclerNotifyAttacher.attach(mRecyclerNotify, mRecyclerView);
         return view;
     }
 
