@@ -1,4 +1,4 @@
-package br.com.zynger.recyclernotify.sample;
+package br.com.zynger.recyclernotifier.sample;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

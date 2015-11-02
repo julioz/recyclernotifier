@@ -1,4 +1,4 @@
-package br.com.zynger.recyclernotify.sample;
+package br.com.zynger.recyclernotifier.sample;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
