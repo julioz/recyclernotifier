@@ -3,6 +3,7 @@ package br.com.zynger.recyclernotify.sample;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.RelativeLayout;
@@ -19,9 +20,20 @@ public class RecyclerNotifyAttacher {
     public static void attach(RecyclerNotifier recyclerNotifier, RecyclerView recyclerView,
                               final int anchor) {
         Context context = recyclerView.getContext();
-        LayoutInflater layoutInflater = LayoutInflater.from(context);
-        RelativeLayout wrappingLayout = (RelativeLayout) layoutInflater
-                .inflate(R.layout.component_recyclernotifywrapper, null);
+        ViewParent recyclerViewParent = recyclerView.getParent();
+
+        final boolean parentAlreadyContainsNotifier;
+        final RelativeLayout wrappingLayout;
+        if (recyclerViewParent instanceof RelativeLayout &&
+                containsRecyclerNotifier((ViewGroup) recyclerViewParent)) {
+            parentAlreadyContainsNotifier = true;
+            wrappingLayout = (RelativeLayout) recyclerViewParent;
+        } else {
+            parentAlreadyContainsNotifier = false;
+            LayoutInflater layoutInflater = LayoutInflater.from(context);
+            wrappingLayout = (RelativeLayout) layoutInflater
+                    .inflate(R.layout.component_recyclernotifywrapper, null);
+        }
 
         int margin = Math.round(context.getResources().getDimension(R.dimen.rn_margin));
         RelativeLayout.LayoutParams layoutParams =
@@ -37,7 +49,11 @@ public class RecyclerNotifyAttacher {
         recyclerNotifier.setLayoutParams(layoutParams);
         wrappingLayout.addView(recyclerNotifier);
 
-        ViewParent recyclerViewParent = recyclerView.getParent();
+        if (parentAlreadyContainsNotifier) {
+            // no need to wrap it again in another ViewGroup
+            return;
+        }
+
         if (recyclerViewParent instanceof ViewGroup) {
             ViewGroup recyclerViewParentViewGroup = (ViewGroup) recyclerViewParent;
             recyclerViewParentViewGroup.removeView(recyclerView);
@@ -48,5 +64,15 @@ public class RecyclerNotifyAttacher {
             throw new RuntimeException("You can only attach a " +
                     RecyclerNotifier.class.getSimpleName() + " to a ViewGroup!");
         }
+    }
+
+    private static boolean containsRecyclerNotifier(ViewGroup viewGroup) {
+        for (int i = 0; i < viewGroup.getChildCount(); ++i) {
+            View nextChild = viewGroup.getChildAt(i);
+            if (nextChild instanceof RecyclerNotifier) {
+                return true;
+            }
+        }
+        return false;
     }
 }
