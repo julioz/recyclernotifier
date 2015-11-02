@@ -12,11 +12,11 @@ public class RecyclerNotifyAttacher {
     public static final int ANCHOR_TOP = 0;
     public static final int ANCHOR_BOTTOM = ANCHOR_TOP + 1;
 
-    public static void attach(RecyclerNotify recyclerNotify, RecyclerView recyclerView) {
-        attach(recyclerNotify, recyclerView, ANCHOR_TOP);
+    public static void attach(RecyclerNotifier recyclerNotifier, RecyclerView recyclerView) {
+        attach(recyclerNotifier, recyclerView, ANCHOR_TOP);
     }
 
-    public static void attach(RecyclerNotify recyclerNotify, RecyclerView recyclerView,
+    public static void attach(RecyclerNotifier recyclerNotifier, RecyclerView recyclerView,
                               final int anchor) {
         Context context = recyclerView.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
@@ -34,8 +34,8 @@ public class RecyclerNotifyAttacher {
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         }
         layoutParams.setMargins(margin, margin, margin, margin);
-        recyclerNotify.setLayoutParams(layoutParams);
-        wrappingLayout.addView(recyclerNotify);
+        recyclerNotifier.setLayoutParams(layoutParams);
+        wrappingLayout.addView(recyclerNotifier);
 
         ViewParent recyclerViewParent = recyclerView.getParent();
         if (recyclerViewParent instanceof ViewGroup) {
@@ -46,7 +46,7 @@ public class RecyclerNotifyAttacher {
             recyclerViewParentViewGroup.addView(wrappingLayout);
         } else {
             throw new RuntimeException("You can only attach a " +
-                    RecyclerNotify.class.getSimpleName() + " to a ViewGroup!");
+                    RecyclerNotifier.class.getSimpleName() + " to a ViewGroup!");
         }
     }
 }

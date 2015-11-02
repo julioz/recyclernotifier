@@ -16,7 +16,7 @@ import java.util.List;
 public class MainActivityFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
-    private RecyclerNotify mRecyclerNotify;
+    private RecyclerNotifier mRecyclerNotifier;
 
     public MainActivityFragment() {
     }
@@ -29,14 +29,14 @@ public class MainActivityFragment extends Fragment {
         view.findViewById(R.id.btn_hide).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mRecyclerNotify.hide();
+                mRecyclerNotifier.hide();
             }
         });
 
         view.findViewById(R.id.btn_show).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mRecyclerNotify.show();
+                mRecyclerNotifier.show();
             }
         });
 
@@ -50,16 +50,16 @@ public class MainActivityFragment extends Fragment {
         SampleAdapter adapter = new SampleAdapter(items);
         mRecyclerView.setAdapter(adapter);
 
-        mRecyclerNotify = new RecyclerNotify(getContext());
-        mRecyclerNotify.setOnClickListener(new View.OnClickListener() {
+        mRecyclerNotifier = new RecyclerNotifier(getContext());
+        mRecyclerNotifier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), "RecyclerNotify clicked!", Toast.LENGTH_SHORT).show();
             }
         });
-        mRecyclerNotify.setText("New stories");
-        RecyclerNotifyAttacher.attach(mRecyclerNotify, mRecyclerView);
-        mRecyclerView.addOnScrollListener(mRecyclerNotify.getOnScrollListener());
+        mRecyclerNotifier.setText("New stories");
+        RecyclerNotifyAttacher.attach(mRecyclerNotifier, mRecyclerView);
+        mRecyclerView.addOnScrollListener(mRecyclerNotifier.getOnScrollListener());
         return view;
     }
 

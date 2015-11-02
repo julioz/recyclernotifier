@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class RecyclerNotify extends LinearLayout {
+public class RecyclerNotifier extends LinearLayout {
 
     private final Animation mShrinkAnimation;
     private final Animation mGrowAnimation;
@@ -28,7 +28,7 @@ public class RecyclerNotify extends LinearLayout {
     private TextView mTitleTextView;
     private boolean mChangeVisibilityWithScrollListener = true;
 
-    public RecyclerNotify(Context context) {
+    public RecyclerNotifier(Context context) {
         super(context);
 
         LayoutInflater layoutInflater = LayoutInflater.from(context);
