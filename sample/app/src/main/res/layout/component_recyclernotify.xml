@@ -6,8 +6,6 @@
         android:id="@+id/rn_icon"
         android:layout_width="18dp"
         android:layout_height="18dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
         android:src="@mipmap/ic_launcher"/>
@@ -19,7 +17,6 @@
         android:layout_gravity="center_vertical"
         android:ellipsize="end"
         android:singleLine="true"
-        android:text="Novas histórias"
         android:textColor="#FFFFFF"
         android:textSize="12sp"/>
 
