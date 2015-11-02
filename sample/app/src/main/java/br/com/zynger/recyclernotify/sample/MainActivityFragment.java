@@ -27,13 +27,14 @@ public class MainActivityFragment extends Fragment {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-
         List<String> items = new ArrayList<>();
         for (int i = 0; i < 30; i++) {
             items.add("Item " + String.valueOf(i));
         }
         SampleAdapter adapter = new SampleAdapter(items);
         mRecyclerView.setAdapter(adapter);
+
+        new RecyclerNotify().attach(mRecyclerView);
         return view;
     }
 
