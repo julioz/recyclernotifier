@@ -26,6 +26,26 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
+        setupButtons(view);
+        setupRecyclerView(view);
+
+        mRecyclerNotifier = new RecyclerNotifier(getContext());
+        mRecyclerNotifier.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), "RecyclerNotifier clicked!", Toast.LENGTH_SHORT).show();
+                mRecyclerNotifier.hide();
+                mRecyclerView.smoothScrollToPosition(0);
+            }
+        });
+
+        mRecyclerNotifier.setText("New stories");
+        mRecyclerView.addOnScrollListener(mRecyclerNotifier.getOnScrollListener());
+        RecyclerNotifierAttacher.attach(mRecyclerNotifier, mRecyclerView);
+        return view;
+    }
+
+    private void setupButtons(View view) {
         view.findViewById(R.id.btn_hide).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,7 +59,9 @@ public class MainActivityFragment extends Fragment {
                 mRecyclerNotifier.show();
             }
         });
+    }
 
+    private void setupRecyclerView(View view) {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -49,19 +71,6 @@ public class MainActivityFragment extends Fragment {
         }
         SampleAdapter adapter = new SampleAdapter(items);
         mRecyclerView.setAdapter(adapter);
-
-        mRecyclerNotifier = new RecyclerNotifier(getContext());
-        mRecyclerNotifier.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContext(), "RecyclerNotifier clicked!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        mRecyclerNotifier.setText("New stories");
-        RecyclerNotifierAttacher.attach(mRecyclerNotifier, mRecyclerView);
-        mRecyclerView.addOnScrollListener(mRecyclerNotifier.getOnScrollListener());
-        return view;
     }
 
     private class SampleAdapter extends RecyclerView.Adapter<SampleAdapter.ViewHolder> {

@@ -22,6 +22,11 @@ public class RecyclerNotifierAttacher {
         Context context = recyclerView.getContext();
         ViewParent recyclerViewParent = recyclerView.getParent();
 
+        if (!(recyclerViewParent instanceof ViewGroup)) {
+            throw new RuntimeException("You can only attach a " +
+                    RecyclerNotifier.class.getSimpleName() + " to a ViewGroup!");
+        }
+
         final boolean parentAlreadyContainsNotifier;
         final RelativeLayout wrappingLayout;
         if (recyclerViewParent instanceof RelativeLayout &&
@@ -35,6 +40,20 @@ public class RecyclerNotifierAttacher {
                     .inflate(R.layout.component_recyclernotifywrapper, null);
         }
 
+        setRecyclerNotifierLayoutParams(recyclerNotifier, anchor, context);
+        wrappingLayout.addView(recyclerNotifier);
+
+        if (!parentAlreadyContainsNotifier) {
+            ViewGroup recyclerViewParentViewGroup = (ViewGroup) recyclerViewParent;
+            recyclerViewParentViewGroup.removeView(recyclerView);
+
+            wrappingLayout.addView(recyclerView, 0);
+            recyclerViewParentViewGroup.addView(wrappingLayout);
+        }
+    }
+
+    private static void setRecyclerNotifierLayoutParams(RecyclerNotifier recyclerNotifier,
+                                                        int anchor, Context context) {
         int margin = Math.round(context.getResources().getDimension(R.dimen.rn_margin));
         RelativeLayout.LayoutParams layoutParams =
                 new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -47,23 +66,6 @@ public class RecyclerNotifierAttacher {
         }
         layoutParams.setMargins(margin, margin, margin, margin);
         recyclerNotifier.setLayoutParams(layoutParams);
-        wrappingLayout.addView(recyclerNotifier);
-
-        if (parentAlreadyContainsNotifier) {
-            // no need to wrap it again in another ViewGroup
-            return;
-        }
-
-        if (recyclerViewParent instanceof ViewGroup) {
-            ViewGroup recyclerViewParentViewGroup = (ViewGroup) recyclerViewParent;
-            recyclerViewParentViewGroup.removeView(recyclerView);
-
-            wrappingLayout.addView(recyclerView, 0);
-            recyclerViewParentViewGroup.addView(wrappingLayout);
-        } else {
-            throw new RuntimeException("You can only attach a " +
-                    RecyclerNotifier.class.getSimpleName() + " to a ViewGroup!");
-        }
     }
 
     private static boolean containsRecyclerNotifier(ViewGroup viewGroup) {
