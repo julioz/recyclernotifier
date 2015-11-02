@@ -26,6 +26,7 @@ public class RecyclerNotify extends LinearLayout {
 
     private ImageView mIconImageView;
     private TextView mTitleTextView;
+    private boolean mChangeVisibilityWithScrollListener = true;
 
     public RecyclerNotify(Context context) {
         super(context);
@@ -90,6 +91,10 @@ public class RecyclerNotify extends LinearLayout {
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
+                if (!mChangeVisibilityWithScrollListener) {
+                    return;
+                }
+
                 if (mTotalScrollAmount > SCROLL_THRESHOLD && isVisible) {
                     hide();
                     isVisible = false;
@@ -107,6 +112,10 @@ public class RecyclerNotify extends LinearLayout {
                 }
             }
         };
+    }
+
+    public void setChangeVisibilityWithScrollListener(boolean changeVisibilityWithScrollListener) {
+        mChangeVisibilityWithScrollListener = changeVisibilityWithScrollListener;
     }
 
     public void setImageResource(@DrawableRes int resId) {

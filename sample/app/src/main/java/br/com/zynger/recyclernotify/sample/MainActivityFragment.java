@@ -57,7 +57,7 @@ public class MainActivityFragment extends Fragment {
                 Toast.makeText(v.getContext(), "RecyclerNotify clicked!", Toast.LENGTH_SHORT).show();
             }
         });
-        mRecyclerNotify.setText("Novas histórias");
+        mRecyclerNotify.setText("New stories");
         RecyclerNotifyAttacher.attach(mRecyclerNotify, mRecyclerView);
         mRecyclerView.addOnScrollListener(mRecyclerNotify.getOnScrollListener());
         return view;
