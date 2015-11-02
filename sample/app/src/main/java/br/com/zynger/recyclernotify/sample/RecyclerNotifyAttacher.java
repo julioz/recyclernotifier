@@ -16,13 +16,17 @@ public class RecyclerNotifyAttacher {
         attach(recyclerNotify, recyclerView, ANCHOR_TOP);
     }
 
-    public static void attach(RecyclerNotify recyclerNotify, RecyclerView recyclerView, final int anchor) {
+    public static void attach(RecyclerNotify recyclerNotify, RecyclerView recyclerView,
+                              final int anchor) {
         Context context = recyclerView.getContext();
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        RelativeLayout wrappingLayout = (RelativeLayout) layoutInflater.inflate(R.layout.component_recyclernotifywrapper, null);
+        RelativeLayout wrappingLayout = (RelativeLayout) layoutInflater
+                .inflate(R.layout.component_recyclernotifywrapper, null);
 
         int margin = Math.round(context.getResources().getDimension(R.dimen.rn_margin));
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams layoutParams =
+                new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
         if (anchor == ANCHOR_BOTTOM) {
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);

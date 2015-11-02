@@ -28,7 +28,8 @@ public class RecyclerNotify extends LinearLayout {
         super(context);
 
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        ViewGroup recyclerNotify = (ViewGroup) layoutInflater.inflate(R.layout.component_recyclernotify, this, true);
+        ViewGroup recyclerNotify = (ViewGroup) layoutInflater
+                .inflate(R.layout.component_recyclernotify, this, true);
         setOrientation(HORIZONTAL);
         setClickable(true);
         setBackgroundResource(R.drawable.component_recyclernotify_round_background);
