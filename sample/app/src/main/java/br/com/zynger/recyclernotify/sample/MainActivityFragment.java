@@ -34,7 +34,8 @@ public class MainActivityFragment extends Fragment {
         SampleAdapter adapter = new SampleAdapter(items);
         mRecyclerView.setAdapter(adapter);
 
-        new RecyclerNotify().attach(mRecyclerView);
+        RecyclerNotify recyclerNotify = new RecyclerNotify(getContext());
+        RecyclerNotifyAttacher.attach(recyclerNotify, mRecyclerView);
         return view;
     }
 
