@@ -14,6 +14,13 @@ The text will be limited to one `singleLine` and will add `ellipsis` (`...`) to 
 - - - 
 Usage
 --------
+
+There are two ways of using the library: dynamically via Java code or statically through XML layouts (there is sample code for each one of the possibilites).
+After that, you're all set! Just call `show()` and `hide()` whenever you want to change the `RecyclerNotifier` visibility.
+The library brings a smooth animation built-in.
+
+#### Via Java
+
 Initialize a `RecyclerNotifier` like so:
 ```java
 RecyclerNotifier recyclerNotifier = new RecyclerNotifier(getContext());
@@ -24,8 +31,47 @@ Then attach it to your `RecyclerView` using:
 RecyclerNotifierAttacher.attach(recyclerNotifier, mRecyclerView);
 ```
 
-After that, you're all set! Just call `show()` and `hide()` whenever you want to change the `RecyclerNotifier` visibility.
-The library brings a smooth animation built-in.
+#### Via XML
+
+Add the following node to **the same** `ViewGroup` where your `RecyclerView` is located:
+```xml
+<br.com.zynger.recyclernotifier.RecyclerNotifier
+        android:id="@+id/recycler_notifier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        library:rn_attachTo="@id/recycler_view"/>
+```
+Notice the `rn_attachTo` attribute: you must pass in the id reference of the `RecyclerView` you want to attach the notifier to.
+
+After adding it to your XML layout, you have to grab that reference through something like
+```java
+mRecyclerNotifier = (RecyclerNotifier) view.findViewById(R.id.recycler_notifier);
+```
+and **call `onParentInflated()`** after your view is inflated so all the attributes take effect. I recommend doing it in `onViewCreated()` of your `Fragment`:
+```java
+@Override
+public void onViewCreated(View view, Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+    mRecyclerNotifier.onParentInflated();
+}
+```
+
+That's it! There are also plenty of attributes you can set in your XML node, like
+```xml
+<br.com.zynger.recyclernotifier.RecyclerNotifier
+        android:id="@+id/recycler_notifier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        library:rn_attachTo="@id/recycler_view"
+        library:rn_imageSrc="..." <!-- drawable resource for the icon -->
+        library:rn_text="..." <!-- text that the notifier will show -->
+        library:rn_textColor="<#hex_value>"
+        library:rn_textVisibility="..." <!-- one of gone, invisible or visible -->
+        library:rn_imageVisibility="..." <!-- same as textVisibility but for the icon -->
+        library:rn_anchor="..." <!-- one of top or bottom -->
+        library:rn_scrollListenerEnabled="boolean" <!-- if the scroll listener must be attached automatically to the RecyclerView-->
+        />
+```
 
 #### Attributes
 You can set a regular `OnClickListener` on it through `setOnClickListener(...)`,
