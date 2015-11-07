@@ -1,0 +1,58 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:library="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    tools:context=".MainActivityFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_hide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HIDE"/>
+
+        <Button
+            android:id="@+id/btn_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SHOW"/>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"/>
+
+    <br.com.zynger.recyclernotifier.RecyclerNotifier
+        android:id="@+id/recycler_notifier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        library:rn_anchor="top"
+        library:rn_attachTo="@id/recycler_view"
+        library:rn_imageSrc="@mipmap/ic_launcher"
+        library:rn_imageVisibility="gone"
+        library:rn_scrollListenerEnabled="true"
+        library:rn_text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis ultricies leo. Mauris fermentum, est at facilisis molestie, eros diam cursus dui, ut porta velit augue nec felis. Morbi feugiat sollicitudin magna, in vulputate eros bibendum accumsan. Proin sollicitudin ipsum nec neque ultrices, non placerat nulla lobortis. Nulla facilisi."/>
+
+    <br.com.zynger.recyclernotifier.RecyclerNotifier
+        android:id="@+id/recycler_notifier2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        library:rn_anchor="bottom"
+        library:rn_attachTo="@id/recycler_view"
+        library:rn_imageSrc="@mipmap/ic_launcher"
+        library:rn_scrollListenerEnabled="false"
+        library:rn_text="New Stories"
+        library:rn_textColor="#00FF00"/>
+</LinearLayout>

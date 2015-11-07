@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="br.com.zynger.recyclernotifier.sample" >
+<manifest
+    package="br.com.zynger.recyclernotifier.sample"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
-            android:name="br.com.zynger.recyclernotifier.sample.MainActivity"
-            android:label="@string/app_name" >
+            android:name=".CodeInflatedSampleActivity"
+            android:label="@string/app_name">
+        </activity>
+        <activity
+            android:name=".LayoutInflatedSampleActivity"
+            android:label="@string/title_activity_layout_inflated_sample">
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
     </application>
