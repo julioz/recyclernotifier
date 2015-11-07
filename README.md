@@ -36,10 +36,10 @@ RecyclerNotifierAttacher.attach(recyclerNotifier, mRecyclerView);
 Add the following node to **the same** `ViewGroup` where your `RecyclerView` is located:
 ```xml
 <br.com.zynger.recyclernotifier.RecyclerNotifier
-        android:id="@+id/recycler_notifier"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        library:rn_attachTo="@id/recycler_view"/>
+  android:id="@+id/recycler_notifier"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  library:rn_attachTo="@id/recycler_view"/>
 ```
 Notice the `rn_attachTo` attribute: you must pass in the id reference of the `RecyclerView` you want to attach the notifier to.
 
@@ -59,20 +59,21 @@ public void onViewCreated(View view, Bundle savedInstanceState) {
 That's it! There are also plenty of attributes you can set in your XML node, like
 ```xml
 <br.com.zynger.recyclernotifier.RecyclerNotifier
-        android:id="@+id/recycler_notifier"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        library:rn_attachTo="@id/recycler_view"
-        library:rn_imageSrc="..." <!-- drawable resource for the icon -->
-        library:rn_text="..." <!-- text that the notifier will show -->
-        library:rn_textColor="<#hex_value>"
-        library:rn_textVisibility="..." <!-- one of gone, invisible or visible -->
-        library:rn_imageVisibility="..." <!-- same as textVisibility but for the icon -->
-        library:rn_anchor="..." <!-- one of top or bottom -->
-        library:rn_scrollListenerEnabled="boolean" <!-- if the scroll listener must be attached automatically to the RecyclerView-->
+  android:id="@+id/recycler_notifier"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  library:rn_attachTo="@id/recycler_view"
+  library:rn_imageSrc="..." <!-- drawable resource for the icon -->
+  library:rn_text="..." <!-- text that the notifier will show -->
+  library:rn_textColor="<#hex_value>"
+  library:rn_textVisibility="..." <!-- one of gone, invisible or visible -->
+  library:rn_imageVisibility="..." <!-- same as textVisibility but for the icon -->
+  library:rn_anchor="..." <!-- one of top or bottom -->
+  library:rn_scrollListenerEnabled="boolean" <!-- if the scroll listener must be attached automatically to the RecyclerView-->
         />
 ```
 
+- - - 
 #### Attributes
 You can set a regular `OnClickListener` on it through `setOnClickListener(...)`,
 and all the other properties through your instance of `RecyclerNotifier`.
