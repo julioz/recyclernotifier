@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RecyclerNotifier">
+        <attr name="rn_attachTo" format="reference"/>
+        <attr name="rn_imageSrc" format="reference"/>
+        <attr name="rn_scrollListenerEnabled" format="boolean"/>
+        <attr name="rn_text" format="string"/>
+        <attr name="rn_textColor" format="color"/>
+        <attr name="rn_textVisibility" format="string"/>
+        <attr name="rn_imageVisibility" format="string"/>
+        <attr name="rn_anchor"/>
+    </declare-styleable>
+
+    <attr name="rn_anchor" format="enum">
+        <enum name="top" value="0"/>
+        <enum name="bottom" value="1"/>
+    </attr>
+</resources>

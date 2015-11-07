@@ -79,4 +79,19 @@ public class RecyclerNotifierAttacher {
         }
         return false;
     }
+
+    protected static void attachThroughXML(RecyclerNotifier recyclerNotifier,
+                                           RecyclerView recyclerView, int anchor) {
+        ViewParent recyclerNotifierParent = recyclerNotifier.getParent();
+
+        if (!(recyclerNotifierParent instanceof ViewGroup)) {
+            throw new RuntimeException("You can only use " +
+                    RecyclerNotifier.class.getSimpleName() + " inside a ViewGroup!");
+        }
+
+        ViewGroup recyclerNotifierParentViewGroup = (ViewGroup) recyclerNotifierParent;
+        recyclerNotifierParentViewGroup.removeView(recyclerNotifier);
+
+        attach(recyclerNotifier, recyclerView, anchor);
+    }
 }
