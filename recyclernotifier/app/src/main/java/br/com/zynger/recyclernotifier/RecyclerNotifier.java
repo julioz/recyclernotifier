@@ -22,11 +22,10 @@ public class RecyclerNotifier extends LinearLayout {
     private final Animation mGrowAnimation;
     private boolean isAnimating = false;
 
-    private RecyclerView.OnScrollListener mOnScrollListener;
+    private RecyclerNotifierScrollListener mOnScrollListener;
 
     private ImageView mIconImageView;
     private TextView mTitleTextView;
-    private boolean mChangeVisibilityWithScrollListener = true;
 
     public RecyclerNotifier(Context context) {
         super(context);
@@ -82,40 +81,13 @@ public class RecyclerNotifier extends LinearLayout {
             }
         });
 
-        mOnScrollListener = new RecyclerView.OnScrollListener() {
-            private static final int SCROLL_THRESHOLD = 20;
-            private int mTotalScrollAmount = 0;
-            private boolean isVisible = true;
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                if (!mChangeVisibilityWithScrollListener) {
-                    return;
-                }
-
-                if (mTotalScrollAmount > SCROLL_THRESHOLD && isVisible) {
-                    hide();
-                    isVisible = false;
-                    mTotalScrollAmount = 0;
-                } else if (mTotalScrollAmount < -SCROLL_THRESHOLD && !isVisible) {
-                    show();
-                    isVisible = true;
-                    mTotalScrollAmount = 0;
-                }
-
-                boolean scrollingDown = dy > 0;
-                boolean scrollingUp = !scrollingDown;
-                if ((isVisible && scrollingDown) || (!isVisible && scrollingUp)) {
-                    mTotalScrollAmount += dy;
-                }
-            }
-        };
+        mOnScrollListener = new RecyclerNotifierScrollListener(this);
     }
 
     public void setChangeVisibilityWithScrollListener(boolean changeVisibilityWithScrollListener) {
-        mChangeVisibilityWithScrollListener = changeVisibilityWithScrollListener;
+        if (mOnScrollListener != null) {
+            mOnScrollListener.setEnabled(changeVisibilityWithScrollListener);
+        }
     }
 
     public void setImageResource(@DrawableRes int resId) {
