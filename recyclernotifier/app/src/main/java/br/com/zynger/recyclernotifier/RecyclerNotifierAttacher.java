@@ -1,6 +1,7 @@
 package br.com.zynger.recyclernotifier;
 
 import android.content.Context;
+import android.support.annotation.IdRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +41,7 @@ public class RecyclerNotifierAttacher {
                     .inflate(R.layout.component_recyclernotifywrapper, null);
         }
 
-        setRecyclerNotifierLayoutParams(recyclerNotifier, anchor, context);
+        setRecyclerNotifierLayoutParams(recyclerNotifier, anchor, context, recyclerView.getId());
         wrappingLayout.addView(recyclerNotifier);
 
         if (!parentAlreadyContainsNotifier) {
@@ -53,16 +54,17 @@ public class RecyclerNotifierAttacher {
     }
 
     private static void setRecyclerNotifierLayoutParams(RecyclerNotifier recyclerNotifier,
-                                                        int anchor, Context context) {
+                                                        int anchor, Context context,
+                                                        @IdRes int anchorViewId) {
         int margin = Math.round(context.getResources().getDimension(R.dimen.rn_margin));
         RelativeLayout.LayoutParams layoutParams =
                 new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
         if (anchor == ANCHOR_BOTTOM) {
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+            layoutParams.addRule(RelativeLayout.ALIGN_BOTTOM, anchorViewId);
         } else {
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+            layoutParams.addRule(RelativeLayout.ALIGN_TOP, anchorViewId);
         }
         layoutParams.setMargins(margin, margin, margin, margin);
         recyclerNotifier.setLayoutParams(layoutParams);
